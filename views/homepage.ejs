@@ -2,9 +2,9 @@
     <!-- upload a new csv file -->
     <div class="row justify-content-center">
         <div class="col col-md-8 col-lg-8 col-xl-6">
-            <h5 class="display-5 text-center mb-5">Upload a csv file</h5>
+            <h5 class="display-5 text-center mb-2">Upload csv file</h5>
             <form action="/upload" enctype="multipart/form-data" method="POST">
-                <label for="file-upload" class="form-label mb-2">Select File : </label>
+                <label for="file-upload" class="form-label mb-2"></label>
                 <input type="file" name="file" id="file-upload" class="form-control mb-4 searchInput" accept=".csv" required >
                 <div class="text-center mb-4"><button type="submit" class=" btn btn-primary" id="upload-btn">Submit</button></div>
             </form>
@@ -16,7 +16,7 @@
     <!-- display previously uploaded files -->
     <div class="row justify-content-center">
         <div class="col col-md-8 col-lg-8 col-xl-6">
-            <h4 class="display-5 text-center mb-5"> view an existing file</h4>
+            <h4 class="display-5 text-center mb-5">Existing files</h4>
             <div class="file-list">
                 <ul class="list-group ">
                     <% for ( let file of files ) { %>
