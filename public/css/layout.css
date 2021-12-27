@@ -1,0 +1,35 @@
+.hover-text:hover{
+    border:1px solid ;
+}
+
+#logo{
+    width: 50px;
+    height: 50px;
+}
+
+body{
+    background-image: linear-gradient(rgb(247, 183, 183),white,rgb(247, 183, 183));
+}
+
+.bg{
+    background-image: linear-gradient(to left,rgb(247, 183, 183),rgb(88, 191, 255));
+    border-bottom: 1px solid black;
+}
+.searchInput{
+    background-color: transparent;
+    border: 1px solid rgb(2, 2, 2);
+}
+li{
+    vertical-align: middle;
+}
+ul{
+    width: auto;
+}
+
+a,button{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(225, 193, 255);
+}

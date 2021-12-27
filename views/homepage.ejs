@@ -1,0 +1,40 @@
+<main class="container">
+    <!-- upload a new csv file -->
+    <div class="row justify-content-center">
+        <div class="col col-md-8 col-lg-8 col-xl-6">
+            <h5 class="display-5 text-center mb-5">Upload a csv file</h5>
+            <form action="/upload" enctype="multipart/form-data" method="POST">
+                <label for="file-upload" class="form-label mb-2">Select File : </label>
+                <input type="file" name="file" id="file-upload" class="form-control mb-4 searchInput" accept=".csv" required >
+                <div class="text-center mb-4"><button type="submit" class=" btn btn-primary" id="upload-btn">Submit</button></div>
+            </form>
+
+        </div>
+        <hr>
+
+    </div>
+    <!-- display previously uploaded files -->
+    <div class="row justify-content-center">
+        <div class="col col-md-8 col-lg-8 col-xl-6">
+            <h4 class="display-5 text-center mb-5"> view an existing file</h4>
+            <div class="file-list">
+                <ul class="list-group ">
+                    <% for ( let file of files ) { %>
+                        <li class="container list-group-item searchInput">
+                            <div class="row">
+                                <div class="col">
+                                    <%=file.name %>
+                                </div>
+                                <div class="col-auto">
+                                    <button>
+                                        <a class="btn float-end" style="padding: 0px;" href="/view-file?fileId=<%=file.id%>&page=0">view</a></div>
+                                    </button>
+                            </div>
+                        </li>
+                        <%}%>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script src="/js/homepage.js"></script>
+</main>
