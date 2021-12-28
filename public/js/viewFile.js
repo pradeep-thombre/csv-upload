@@ -4,7 +4,7 @@
     const tableContainer= document.querySelector("#table-container");
     const table = document.querySelector("#table") ;
     const tBody = document.querySelector("#t-body") ;
-    // console.log(tBody)
+    
     // this creates a contant copy of initial table when the page loads
     const arr = Array.from(tBody.children).map((item)=>
     {

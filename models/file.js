@@ -2,7 +2,11 @@ const mongoose = require("mongoose") ;
 const {Schema} = mongoose ;
 const multer = require("multer") ;
 const path = require("path") ;
+
+// declaring file path 
 const FILE_PATH = path.join("/public/uploads/csv files");
+
+// creating schema for file 
 const fileSchema = new Schema ( {
     name:{
         type:String,
@@ -16,6 +20,8 @@ const fileSchema = new Schema ( {
 {
     timestamps:true 
 }) ;
+
+
 // setting up multer to use with database
 let storage = multer.diskStorage ({
     destination :function (req , file , cb)
@@ -27,6 +33,8 @@ let storage = multer.diskStorage ({
         cb(null , file.fieldname+'-'+Date.now()+path.extname(file.originalname) ) ;
     }
 }) ;
+
+
 // static fns 
 fileSchema.statics.uploadedFile = multer( {storage:storage}).single("file") ;
 fileSchema.statics.filePath = FILE_PATH ; 
