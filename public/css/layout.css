@@ -33,3 +33,14 @@ a,button{
     padding: 5px;
     background-color: rgb(225, 193, 255);
 }
+
+td,th{
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 2px 5px;
+    margin: 2px;
+}
+.tablediv{
+    width: 80vw;
+    margin: auto;
+}

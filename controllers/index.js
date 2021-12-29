@@ -1,9 +1,7 @@
 // importing all required library and files 
 const File = require("../models/file");
-const csv = require('csv-parser');
-const fs = require("fs");
-const path = require("path");
-
+const csv = require("csvtojson");
+const upload = require("../config/multer");
 
 // rendering home page 
 module.exports.homePage = async (req, res) => {
@@ -15,84 +13,50 @@ module.exports.homePage = async (req, res) => {
 
 // upload file action 
 module.exports.uploadFile =async (req, res) => {
-    let uploadeFile= await File.uploadedFile(req, res,  async function (err) {
-        if (err) {
-            console.log("multer error ", err);
-        }
-    //    creating a file with as uploaded data
-        let file= await File.create({
-            name: req.file.originalname
-            , filePath: File.filePath + "/" + req.file.filename
-        })
-        return res.redirect("back");
-    })
+    try {
+        upload.single("file");
+        const dataArr = await csv().fromString(req.file.buffer.toString());
+
+        // Create new user
+        let file =await File.create({
+          name: req.file.originalname,
+          data:dataArr
+        });
+        
+        return res.redirect("/view-file?fileId="+file._id);
+    } catch (err) {
+        console.log("err",err);
+    }
 }
 module.exports.viewFile = async (req, res) => {
-    let headers = [];
-    let dataArray = [];
-
-    // or rather use id here
-    let fileId = req.query.fileId;
-    let pageNo = parseInt(req.query.page) ;
-
-    // skip lines as
-    let skip= pageNo*10 ;let limit = 10;
-    if (pageNo==0)
-    {
-        skip=0 ;
-    }
-    let paginationObj = {} ;
     
+    let fileId = req.query.fileId;
     let fileObj = await File.findById(fileId);
-    var headerStream =await fs.createReadStream(path.join(__dirname, "..", fileObj.filePath))
-    .pipe(csv())
-    .on('headers', (header_arr) => {
+    filename=fileObj.name;
+    dataArr=fileObj.data;
+    maxhight=0;
+    var maxItem;
+    for(let item of dataArr){
+        if(maxhight<Object.keys(item).length){
+            maxhight=Object.keys(item).length;
+            maxItem=item;
+        }
+    }
+    headers=Object.keys(maxItem);
+    // for(let item of dataArr){
+    //         for(let i=0;i<headers.length;i++) {
+    //             // console.log(headers[i])
+    //             console.log(item[headers[i]]);
+    //         }
+    // }
 
-        // headers of the table 
-        headers = header_arr;
-        headerStream.destroy();
-    }) ;
-    var readStream = await fs.createReadStream(path.join(__dirname, "..", fileObj.filePath))
-        .pipe(csv({skipLines :skip}))
-        .on('data', (row) => {
-            
-            // fetching all rows  and pushing into array
-            dataArray.push(row);
-            limit-- ;
-            // if limit is reached 
-            if (limit==0){
-                readStream.destroy();
-                console.log("csv file successfully processed");
-                
-                paginationObj["prevClass"]=((pageNo <= 0)?"disabled":"") ;
-                paginationObj["nextClass"]=("") ;
-
-                res.render("viewFile", {
-                    headers: headers
-                    , dataArray: dataArray,
-                    pageNo :pageNo,
-                    fileId:fileId,
-                    paginationObj :paginationObj ,
-                    homeLink:true 
-                    
-                })
-            }
-
-           
-        })
-        .on('end', () => {
-            console.log("csv file successfully processed");
-            // all data has been processed 
-            paginationObj["prevClass"]=((pageNo <= 0)?"disabled":"") ;
-            paginationObj["nextClass"]=("disabled") ;
-            res.render("viewFile", {
-                headers: headers
-                , dataArray: dataArray,
-                pageNo :pageNo,
-                fileId:fileId,
-                paginationObj :paginationObj,
-                homeLink:true 
-            })
-        });
+    res.render("table", 
+    {
+        name:filename,
+        headers: headers, 
+        dataArr: dataArr,
+        homeLink:true 
+                        
+    })
 
 }

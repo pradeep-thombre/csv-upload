@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="/css/layout.css">
+
+<h4 class="display-5 text-center mb-2"><%=name.toUpperCase()%></h4>
+<div class="tablediv">
+    <table id="data-table">
+        <thead>
+            <tr>
+                <%for(let head of headers){%>
+                    <td><%=head%></td>
+                <%}%>
+
+            </tr>
+        </thead>
+        <tbody>
+            <%for(let item of dataArr){%>
+                <tr>
+                    <%for(let i=0;i<headers.length;i++) {%>
+                        <% if(item[headers[i]]){%>
+                            <td><%=item[headers[i]]%></td>
+                        <%}else{%>
+                            <td>-</td>
+                        <%}%>
+                    <%}%>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</div>
+<!-- scripts -->
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<script src="/js/viewFile.js"></script>
