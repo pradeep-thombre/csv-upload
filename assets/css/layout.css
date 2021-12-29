@@ -36,11 +36,13 @@ a,button{
 
 td,th{
     border: 1px solid black;
-    border-radius: 2px;
-    padding: 2px 5px;
-    margin: 2px;
+    border-radius: 5px;
 }
 .tablediv{
     width: 80vw;
     margin: auto;
+}
+
+table.dataTable tbody tr {
+    background-color: transparent;
 }

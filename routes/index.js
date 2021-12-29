@@ -7,6 +7,6 @@ const upload = require("../config/multer");
 router.get("/" ,fileController.homePage) ;
 router.post("/upload",upload.single("file"),fileController.uploadFile );
 
-router.post("/upload",fileController.uploadFile );
+router.get("/remove/:id",fileController.removeFile );
 router.get("/view-file", fileController.viewFile)
 module.exports = router ;

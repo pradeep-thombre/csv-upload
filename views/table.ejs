@@ -1,17 +1,25 @@
+<!-- data table style  -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="/css/layout.css">
 
+<!-- filename  -->
 <h4 class="display-5 text-center mb-2"><%=name.toUpperCase()%></h4>
+
+<!-- table  -->
 <div class="tablediv">
     <table id="data-table">
+
+        <!-- table headers  -->
         <thead>
             <tr>
                 <%for(let head of headers){%>
-                    <td><%=head%></td>
+                    <th><%=head%></td>
                 <%}%>
 
             </tr>
         </thead>
+
+        <!-- table body  -->
         <tbody>
             <%for(let item of dataArr){%>
                 <tr>
@@ -30,7 +38,7 @@
 <!-- scripts -->
 
 
-
+<!-- and jquery and data table library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <script src="/js/viewFile.js"></script>

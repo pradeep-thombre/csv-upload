@@ -1,4 +1,9 @@
+
+
+
+<!-- header data  -->
 <main class="container">
+    
     <!-- upload a new csv file -->
     <div class="row justify-content-center">
         <div class="col col-md-8 col-lg-8 col-xl-6">
@@ -13,6 +18,8 @@
         <hr>
 
     </div>
+
+
     <!-- display previously uploaded files -->
     <div class="row justify-content-center">
         <div class="col col-md-8 col-lg-8 col-xl-6">
@@ -27,8 +34,12 @@
                                 </div>
                                 <div class="col-auto">
                                     <button>
-                                        <a class="btn float-end" style="padding: 0px;" href="/view-file?fileId=<%=file.id%>">view</a></div>
+                                        <a class="btn float-end" style="padding: 0px;" href="/view-file?fileId=<%=file.id%>">view</a>
                                     </button>
+                                    <!-- <button> -->
+                                        <a class="btn float-end" href="/remove/<%=file.id%>"> <i class="fas fa-trash"></i></a>
+                                    <!-- </button> -->
+                                </div>
                             </div>
                         </li>
                         <%}%>
@@ -36,5 +47,8 @@
             </div>
         </div>
     </div>
+
+
+<!-- scripts  -->
 <script src="/js/homepage.js"></script>
 </main>
