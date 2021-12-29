@@ -15,21 +15,17 @@ module.exports.homePage = async (req, res) => {
 
 // upload file action 
 module.exports.uploadFile =async (req, res) => {
-    try{
-        let uploadeFile= await File.uploadedFile(req, res,  async function (err) {
-            if (err) {
-                console.log("multer error ", err);
-            }
-        //    creating a file with as uploaded data
-            let file= await File.create({
-                name: req.file.originalname
-                , filePath: File.filePath + "/" + req.file.filename
-            })
-            return res.redirect("back");
+    let uploadeFile= await File.uploadedFile(req, res,  async function (err) {
+        if (err) {
+            console.log("multer error ", err);
+        }
+    //    creating a file with as uploaded data
+        let file= await File.create({
+            name: req.file.originalname
+            , filePath: File.filePath + "/" + req.file.filename
         })
-    }catch(err){
-        console.log('error',err);
-    }
+        return res.redirect("back");
+    })
 }
 module.exports.viewFile = async (req, res) => {
     let headers = [];

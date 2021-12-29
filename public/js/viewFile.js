@@ -51,10 +51,3 @@
         
     }
     
-
-
-    
-$(document).ready(function() {
-    let table=document.getElementById('table');
-    table.DataTable();
-});
